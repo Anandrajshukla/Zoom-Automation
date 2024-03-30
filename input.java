@@ -525,19 +525,20 @@ passcodeField.addFocusListener(new FocusAdapter() {
 
         public void createAndShowGUI() {
         JFrame frame = new JFrame("Meeting Scheduler");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         JPanel panel = new JPanel();
        
         JPanel panel2 = createScheduledMeetingsPanel();
         frame.add(panel);
         frame.setVisible(true);
-         panel.add(panel2);
+	 panel.add(panel2);
          panel.setPreferredSize(new Dimension(1920, 1360));
          panel.setBackground(new Color(0, 33, 43, 255));
          panel.setLayout(null);
          panel.setBounds(0, 0, 1920, 1080);
     }
+
 
     
 
@@ -564,7 +565,7 @@ passcodeField.addFocusListener(new FocusAdapter() {
         };;
         panel2.setLayout(null); // Absolute layout
         panel2.setBackground(new Color(0, 90, 111, 255));
-        panel2.setBounds(680, 250, 600, 600);
+        panel2.setBounds(550, 200, 900, 650);
 
         // Create a table to display the scheduled meetings
         Vector<String> columnNames = new Vector<>();
@@ -579,7 +580,7 @@ passcodeField.addFocusListener(new FocusAdapter() {
         DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
         table = new JTable(tableModel); // Initialize table
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(10, 10, 580, 300); // Set bounds for the scroll pane
+        scrollPane.setBounds(10, 10, 880, 605); // Set bounds for the scroll pane
         panel2.add(scrollPane);
 
         // Create a delete button
@@ -612,8 +613,12 @@ passcodeField.addFocusListener(new FocusAdapter() {
                 }
             }
         });
-        deleteButton.setBounds(10, 320, 100, 30); // Set bounds for the delete button
-        panel2.add(deleteButton);
+        deleteButton.setBounds(10, 618, 90, 25); // Set bounds for the delete button
+        deleteButton.setFont(new Font("Times new Roman", Font.BOLD, 14));
+	deleteButton.setForeground(Color.BLACK);
+	Color transparentColor = new Color(255, 255, 255, 100); 
+	deleteButton.setBackground(transparentColor);
+	panel2.add(deleteButton);
 
         // Create a refresh button
         JButton refreshButton = new JButton("Refresh");
@@ -624,11 +629,15 @@ passcodeField.addFocusListener(new FocusAdapter() {
                 tableModel.fireTableDataChanged(); // Notify the table model that the data has changed
             }
         });
-        refreshButton.setBounds(120, 320, 100, 30); // Set bounds for the refresh button
-        panel2.add(refreshButton);
+        refreshButton.setBounds(120, 618, 100, 25); // Set bounds for the refresh button
+        refreshButton.setFont(new Font("Times new Roman", Font.BOLD, 14));
+	refreshButton.setForeground(Color.BLACK); 
+        refreshButton.setBackground(transparentColor);
+	panel2.add(refreshButton);
 
         return panel2;
-    }
+ 
+       }
     private void refreshData(Vector<Vector<Object>> data) {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/regumate", "reguuser", "regupass");
