@@ -565,7 +565,7 @@ passcodeField.addFocusListener(new FocusAdapter() {
         };;
         panel2.setLayout(null); // Absolute layout
         panel2.setBackground(new Color(0, 90, 111, 255));
-        panel2.setBounds(550, 200, 900, 650);
+        panel2.setBounds(500, 200, 900, 650);
 
         // Create a table to display the scheduled meetings
         Vector<String> columnNames = new Vector<>();
@@ -613,11 +613,13 @@ passcodeField.addFocusListener(new FocusAdapter() {
                 }
             }
         });
-        deleteButton.setBounds(10, 618, 90, 25); // Set bounds for the delete button
+
+        deleteButton.setBounds(690, 618, 90, 25); // Set bounds for the delete button
         deleteButton.setFont(new Font("Times new Roman", Font.BOLD, 14));
 	deleteButton.setForeground(Color.BLACK);
 	Color transparentColor = new Color(255, 255, 255, 100); 
 	deleteButton.setBackground(transparentColor);
+
 	panel2.add(deleteButton);
 
         // Create a refresh button
@@ -629,7 +631,7 @@ passcodeField.addFocusListener(new FocusAdapter() {
                 tableModel.fireTableDataChanged(); // Notify the table model that the data has changed
             }
         });
-        refreshButton.setBounds(120, 618, 100, 25); // Set bounds for the refresh button
+        refreshButton.setBounds(790, 618, 100, 25); // Set bounds for the refresh button
         refreshButton.setFont(new Font("Times new Roman", Font.BOLD, 14));
 	refreshButton.setForeground(Color.BLACK); 
         refreshButton.setBackground(transparentColor);
