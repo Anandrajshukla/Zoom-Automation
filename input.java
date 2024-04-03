@@ -583,24 +583,45 @@ passcodeField.addFocusListener(new FocusAdapter() {
         scrollPane.setBounds(10, 10, 880, 605); // Set bounds for the scroll pane
         panel2.add(scrollPane);
 
-        // Create a delete button
+      
+        // Create a refresh button
+        JButton refreshButton = new JButton("Refresh");
+        refreshButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                refreshData(data);
+                tableModel.fireTableDataChanged(); // Notify the table model that the data has changed
+            }
+        });
+        refreshButton.setBounds(790, 618, 100, 25); // Set bounds for the refresh button
+        refreshButton.setFont(new Font("Times new Roman", Font.BOLD, 14));
+	refreshButton.setForeground(Color.BLACK); 
+        refreshButton.setBackground(transparentColor);
+	panel2.add(refreshButton);
+	
+	
+	
+	// Create a delete button
         JButton deleteButton = new JButton("Delete");
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int selectedRow = table.getSelectedRow();
                 if (selectedRow != -1) {
-                    DefaultTableModel model = (DefaultTableModel) table.getModel();
-                    model.removeRow(selectedRow);
-                    String meetingIdToDelete = (String) model.getValueAt(selectedRow, 0); // Assuming meeting ID is in the first column
-                    // Perform deletion from the database using meetingIdToDelete
+                   
+                    String meetingTimeToDelete = (String) model.getValueAt(selectedRow, 1); // Assuming meeting time is in the second column
+                    
                     try {
                         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/regumate", "reguuser", "regupass");
                         PreparedStatement deleteStatement = con.prepareStatement("DELETE FROM meetings WHERE meeting_id = ?");
-                        deleteStatement.setString(1, meetingIdToDelete);
+                        deleteStatement.setString(2, meetingTimeToDelete);
                         int rowsDeleted = deleteStatement.executeUpdate();
                         if (rowsDeleted > 0) {
                             JOptionPane.showMessageDialog(null, "Meeting deleted successfully.");
+                            
+                                 //calling refresh button's action
+                        refreshButton.doClick();
+                        
                         } else {
                             JOptionPane.showMessageDialog(null, "Failed to delete meeting.", "Error", JOptionPane.ERROR_MESSAGE);
                         }
@@ -622,20 +643,6 @@ passcodeField.addFocusListener(new FocusAdapter() {
 
 	panel2.add(deleteButton);
 
-        // Create a refresh button
-        JButton refreshButton = new JButton("Refresh");
-        refreshButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                refreshData(data);
-                tableModel.fireTableDataChanged(); // Notify the table model that the data has changed
-            }
-        });
-        refreshButton.setBounds(790, 618, 100, 25); // Set bounds for the refresh button
-        refreshButton.setFont(new Font("Times new Roman", Font.BOLD, 14));
-	refreshButton.setForeground(Color.BLACK); 
-        refreshButton.setBackground(transparentColor);
-	panel2.add(refreshButton);
 
         return panel2;
  
