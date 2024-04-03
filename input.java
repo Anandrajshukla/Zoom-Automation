@@ -271,7 +271,7 @@ public class input extends JFrame {
 
           //adding hyperlink to the code
         JLabel hyperlinkLabel = new JLabel("<html><h3>Click here to open a new page</h3></html>");
-         hyperlinkLabel.setBounds(850, 730, 1700, 500);
+         hyperlinkLabel.setBounds(860, 960, 250, 28);
          hyperlinkLabel.setForeground(Color.WHITE);
           P1.add(hyperlinkLabel);
         hyperlinkLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -288,6 +288,7 @@ public class input extends JFrame {
 
         P2.add(meetingIdLabel);
         meetingIdField.setBounds(340, 65, textFieldWidth, 25);
+        meetingIdField.setToolTipText("Enter Meet ID ");
 
 	//Takes on next Line on pressing'Enter'  Add action listener to the meetingIdField
 	meetingIdField.addActionListener(new ActionListener() {
@@ -317,6 +318,8 @@ public class input extends JFrame {
         meetTimeLabel.setForeground(Color.white);
         P2.add(meetTimeLabel);
         meetTimeField.setBounds(340, 105, textFieldWidth, 28);
+        meetingIdField.setToolTipText("Enter Meet ID ");
+
         
 	//Takes on next Line on pressing'Enter'  Add action listener to the meetTimeField
          meetTimeField.addActionListener(new ActionListener() {
@@ -334,6 +337,8 @@ public class input extends JFrame {
         totalMeetTimeLabel.setForeground(Color.white);
         P2.add(totalMeetTimeLabel);
         totalMeetTimeField.setBounds(340, 150, textFieldWidth, 28);
+        totalMeetTimeField.setToolTipText("Enter Meet Duration in minutes ");
+        
         
 	//Takes on next Line on pressing'Enter'  Add action listener to the totamMeetTimeField
         totalMeetTimeField.addActionListener(new ActionListener() {
@@ -596,6 +601,7 @@ passcodeField.addFocusListener(new FocusAdapter() {
         refreshButton.setBounds(790, 618, 100, 25); // Set bounds for the refresh button
         refreshButton.setFont(new Font("Times new Roman", Font.BOLD, 14));
 	refreshButton.setForeground(Color.BLACK); 
+	      	Color transparentColor = new Color(255, 255, 255, 100); 
         refreshButton.setBackground(transparentColor);
 	panel2.add(refreshButton);
 	
@@ -609,7 +615,8 @@ passcodeField.addFocusListener(new FocusAdapter() {
                 int selectedRow = table.getSelectedRow();
                 if (selectedRow != -1) {
                    
-                    String meetingTimeToDelete = (String) model.getValueAt(selectedRow, 1); // Assuming meeting time is in the second column
+                    String meetingTimeToDelete = (String) table.getValueAt(selectedRow, 1); 
+                    //Assuming meeting time is in the second column
                     
                     try {
                         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/regumate", "reguuser", "regupass");
@@ -638,8 +645,7 @@ passcodeField.addFocusListener(new FocusAdapter() {
         deleteButton.setBounds(690, 618, 90, 25); // Set bounds for the delete button
         deleteButton.setFont(new Font("Times new Roman", Font.BOLD, 14));
 	deleteButton.setForeground(Color.BLACK);
-	Color transparentColor = new Color(255, 255, 255, 100); 
-	deleteButton.setBackground(transparentColor);
+  deleteButton.setBackground(transparentColor);
 
 	panel2.add(deleteButton);
 
