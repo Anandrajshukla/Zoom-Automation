@@ -479,7 +479,28 @@ passcodeField.addFocusListener(new FocusAdapter() {
             JOptionPane.showMessageDialog(this, "Passcode is required.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+         // Parse meetTime to hours and minutes
+    String[] meetTimeParts = meetTime.split(":");
+    int meetTimeHours = Integer.parseInt(meetTimeParts[0]);
+    int meetTimeMinutes = Integer.parseInt(meetTimeParts[1]);
 
+    // Calculate total minutes of meetTime
+    int totalMeetTimeMinutes = meetTimeHours * 60 + meetTimeMinutes;
+
+    // Check if the meeting time exceeds 24 hours
+    if (totalMeetTimeMinutes > 24 * 60) { // Convert 24 hours to minutes
+        JOptionPane.showMessageDialog(this, "Meeting time cannot exceed 24 hours.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    else if(meetTimeHours>=24){
+     JOptionPane.showMessageDialog(this, "i thought there are 60 minutes only in one hour.", "Error", JOptionPane.ERROR_MESSAGE);
+    
+    }
+    else if(meetTimeMinutes >= 60){
+       JOptionPane.showMessageDialog(this, "i thought there are 60 minutes only in one hour.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    
+    }
         // Convert totalMeetTime to an integer using type casting
         int totalMeetTimeInt = 0;
         try {
